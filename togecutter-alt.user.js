@@ -5,7 +5,7 @@
 // @include     https://togetter.com/li/*
 // @include     http://togetter.com/li/*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
-// @version     6
+// @version     6.1
 // @grant       none
 // ==/UserScript==
 
@@ -65,20 +65,17 @@ jQuery.noConflict()($ => {
             return [];
         },
         set(ids) {
-            localStorage[KEY] = JSON.stringify(ids);
+            const delDups = arr => [...new Set(arr)];
+            localStorage[KEY] = JSON.stringify(delDups(ids));
         },
     });
 
     function addHiddenUserId(id) {
-        const set = new Set($.hiddenUserIds);
-        set.add(id);
-        $.hiddenUserIds = [...set];
+        $.hiddenUserIds = $.hiddenUserIds.concat(id);
     }
 
     function removeHiddenUserId(id) {
-        const set = new Set($.hiddenUserIds);
-        set.delete(id);
-        $.hiddenUserIds = [...set];
+        $.hiddenUserIds = $.hiddenUserIds.filter(e => id !== e);
     }
 
     function hideUsers() {
