@@ -79,41 +79,41 @@ jQuery.noConflict()($ => {
     }
 
     function hideUsers() {
-        $("#comment_box li").each(function(){
+        $('#comment_box li').each(function(){
             var listItem = $(this);
-            var idLink = listItem.find("a.status_name");
-            var id = idLink.text().replace(/^@/, "");
+            var idLink = listItem.find('a.status_name');
+            var id = idLink.text().replace(/^@/, '');
 
             if ($.hiddenUserIds.includes(id)) {
-                listItem.find(".list_tweet_box").hide();
-                if (listItem.find(".removed").length == 0) {
+                listItem.find('.list_tweet_box').hide();
+                if (listItem.find('.removed').length == 0) {
                     $(`<span class="removed" title="${id}">[削除済]</span>`)
                         .hide()
-                        .css("cursor", "pointer")
+                        .css('cursor', 'pointer')
                         .dblclick(function() {
-                            if (confirm("このユーザを見えるようにしますか？")) {
+                            if (confirm('このユーザを見えるようにしますか？')) {
                                 removeHiddenUserId(id);
                             }
                         })
                         .appendTo(listItem);
                 }
-                listItem.find(".removed").show();
+                listItem.find('.removed').show();
             } else {
-                listItem.find(".list_tweet_box").show();
-                listItem.find(".removed").hide();
+                listItem.find('.list_tweet_box').show();
+                listItem.find('.removed').hide();
             }
         });
     }
 
-    $("#comment_box li").each(function(){
+    $('#comment_box li').each(function(){
         var listItem = $(this);
-        var idLink = listItem.find("a.status_name");
-        var id = idLink.text().replace(/^@/, "");
+        var idLink = listItem.find('a.status_name');
+        var id = idLink.text().replace(/^@/, '');
 
-        $("<span class=\"status_name\" title=\"このユーザのコメントを見えなくする\">[×]</span>")
-            .css("cursor", "pointer")
+        $('<span class="status_name" title="このユーザのコメントを見えなくする">[×]</span>')
+            .css('cursor', 'pointer')
             .click(function() {
-                if (confirm("このユーザを見えなくしますか？")) {
+                if (confirm('このユーザを見えなくしますか？')) {
                     addHiddenUserId(id);
                 }
                 hideUsers();
