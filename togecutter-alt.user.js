@@ -81,7 +81,7 @@ jQuery.noConflict()($ => {
     function hideUsers() {
         $("#comment_box li").each(function(){
             var listItem = $(this);
-            var idLink = $(this).find("a.status_name");
+            var idLink = listItem.find("a.status_name");
             var id = idLink.text().replace(/^@/, "");
 
             if ($.hiddenUserIds.includes(id)) {
